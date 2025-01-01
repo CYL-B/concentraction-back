@@ -20,5 +20,5 @@ A server built with Node, Express and Apollo server to process GraphQL requests 
 Active/In development
 
 ## Roadmap
-- (on going) : implementing new resolver, new GraphQL schema to process put request to change a task status (do, ongoing, done)
+- (on going) : implementing new resolver, new GraphQL schema to process PUT request to change a task status (do, ongoing, done)
   
