@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Error: No default engine was specified and no extension was provided.<br> &nbsp; &nbsp;at new View (/Users/Camille/Desktop/Lacapsule/projets/Concentraction/concentraction-back/node_modules/express/lib/view.js:61:11)<br> &nbsp; &nbsp;at Function.render (/Users/Camille/Desktop/Lacapsule/projets/Concentraction/concentraction-back/node_modules/express/lib/application.js:587:12)<br> &nbsp; &nbsp;at ServerResponse.render (/Users/Camille/Desktop/Lacapsule/projets/Concentraction/concentraction-back/node_modules/express/lib/response.js:1049:7)<br> &nbsp; &nbsp;at file:///Users/Camille/Desktop/Lacapsule/projets/Concentraction/concentraction-back/server/app.js:92:7<br> &nbsp; &nbsp;at Layer.handle_error (/Users/Camille/Desktop/Lacapsule/projets/Concentraction/concentraction-back/node_modules/express/lib/router/layer.js:71:5)<br> &nbsp; &nbsp;at trim_prefix (/Users/Camille/Desktop/Lacapsule/projets/Concentraction/concentraction-back/node_modules/express/lib/router/index.js:326:13)<br> &nbsp; &nbsp;at /Users/Camille/Desktop/Lacapsule/projets/Concentraction/concentraction-back/node_modules/express/lib/router/index.js:286:9<br> &nbsp; &nbsp;at Function.process_params (/Users/Camille/Desktop/Lacapsule/projets/Concentraction/concentraction-back/node_modules/express/lib/router/index.js:346:12)<br> &nbsp; &nbsp;at next (/Users/Camille/Desktop/Lacapsule/projets/Concentraction/concentraction-back/node_modules/express/lib/router/index.js:280:10)<br> &nbsp; &nbsp;at Layer.handle_error (/Users/Camille/Desktop/Lacapsule/projets/Concentraction/concentraction-back/node_modules/express/lib/router/layer.js:67:12)</pre>
+</body>
+</html>

@@ -6,8 +6,7 @@ import cors from "cors";
 import "dotenv/config.js";
 // import gql from "graphql-tag";
 import { ApolloServer } from "@apollo/server";
-
-
+import bodyParser from "body-parser";
 import { buildSubgraphSchema } from "@apollo/subgraph";
 import { expressMiddleware } from "@apollo/server/express4";
 import resolvers from "./resolvers.js";
@@ -29,9 +28,11 @@ const app = express();
 // const httpServer = http.createServer(app);
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json(), bodyParser.json());
 //DB connection
 connect();
+
+
 
 //verifies the JWT token and retrieves the user from the database.
 const authenticate = async (token) => {
@@ -59,8 +60,9 @@ const authenticate = async (token) => {
 const server = new ApolloServer({
   schema: buildSubgraphSchema({
     typeDefs,
-    resolvers
+    resolvers,
   }),
+  allowBatchedHttpRequests: true
 });
 
 // Note you must call `start()` on the `ApolloServer`
@@ -68,7 +70,9 @@ const server = new ApolloServer({
 await server.start();
 
 // Specify the path to mount the server
-app.use("/graphql", cors(), express.json(), expressMiddleware(server, {
+app.use("/graphql", cors(), express.json(), expressMiddleware
+
+(server, {
   context: async ({ req }) => {
     const token = req.headers.authorization;
     const user = await authenticate(token);

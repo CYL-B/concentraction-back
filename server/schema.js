@@ -29,6 +29,9 @@ export const typeDefs = gql`
 
     "update a task"
     updateTask(id: ID!, content: TaskContent!): UpdateTaskResponse!
+
+    "update status of task"
+    updateTasksBatch(updates: [TaskUpdateInput!]!): UpdateTasksBatchResponse!
   }
 
   "Information to provide as argument of user, used in signup and login"
@@ -46,6 +49,12 @@ export const typeDefs = gql`
     startDate: String
     endDate: String
     desc: String
+  }
+
+  "Information to provide as argument of task update"
+  input TaskUpdateInput {
+    id: ID!
+    status: Status! 
   }
 
   "Tasks of user"
@@ -91,6 +100,12 @@ export const typeDefs = gql`
     success: Boolean!
     message: String!
     task: Task
+  }
+
+  type UpdateTasksBatchResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
   }
 
 

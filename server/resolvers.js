@@ -241,15 +241,15 @@ const resolvers = {
       if (user) {
         const userID = user.id ?? user._id;
         const updateTask = await UserModel.updateOne(
-          { _id: userID, "tasks._id": id},
+          { _id: userID, "tasks._id": id },
           {
             $set: {
               "tasks.$.name": name,
               "tasks.$.category": category,
               "tasks.$.status": status,
-            }
+            },
           }
-        )
+        );
 
         const findUser = await UserModel.findOne({ _id: userID });
         const findTask = findUser.tasks.find((task) => task.id === id);
@@ -284,6 +284,44 @@ const resolvers = {
       // let collection = await db.collection("users");
       // const dbDelete = await collection.deleteOne({ _id: new ObjectId(id) });
       // return dbDelete.acknowledged && dbDelete.deletedCount == 1 ? true : false;
+    },
+
+    updateTasksBatch: async (_, { content }, contextValue) => {
+      const user = contextValue.user;
+      if (user) {
+        const userID = user.id ?? user._id;
+        const bulkOps = content.map(({ id, status }) => ({
+          updateOne: {
+            filter: { _id: id },
+            update: { $set: { "tasks.$.status": status } },
+          },
+        }));
+        const result = await UserModel.findOne({ _id: userID }).bulkWrite(
+          bulkOps
+        );
+
+        // const result = await db.collection('tasks').bulkWrite(bulkOps);
+
+        if (result.acknowledged == true) {
+          return {
+            code: 200,
+            success: true,
+            message: `"${result.modifiedCount}" tasks successfully updated`,
+          };
+        } else {
+          return {
+            code: 500,
+            success: false,
+            message: "Something went wrong",
+          };
+        }
+      } else {
+        return {
+          code: 401,
+          success: false,
+          message: "You don't have permission to update a task",
+        };
+      }
     },
   },
 };
