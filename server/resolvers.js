@@ -68,9 +68,7 @@ const resolvers = {
       const user = contextValue.user;
       if (user) {
         const userID = user.id ?? user._id;
-        // console.log("userID", userID);
         const findUser = await UserModel.findOne({ _id: userID });
-
         return {
           code: 200,
           success: true,
@@ -244,8 +242,6 @@ const resolvers = {
           { _id: userID, "tasks._id": id },
           {
             $set: {
-              "tasks.$.name": name,
-              "tasks.$.category": category,
               "tasks.$.status": status,
             },
           }
@@ -259,7 +255,7 @@ const resolvers = {
             success: true,
             message: "Task successfully updated",
             task: {
-              id: findTask.id,
+              id: findTask._id,
               name: findTask.name,
               priority: findTask.priority,
               category: findTask.category,
