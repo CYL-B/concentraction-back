@@ -28,10 +28,8 @@ export const typeDefs = gql`
     deleteTask(id: ID!): Task!
 
     "update a task"
-    updateTask(id: ID!, content: TaskContent!): UpdateTaskResponse!
+    updateTask(id: ID!, content: TaskContentUpdate): UpdateTaskResponse!
 
-    "update status of task"
-    updateTasksBatch(updates: [TaskUpdateInput!]!): UpdateTasksBatchResponse!
   }
 
   "Information to provide as argument of user, used in signup and login"
@@ -46,6 +44,17 @@ export const typeDefs = gql`
     priority: Priority
     category: Category!
     status: Status!
+    startDate: String
+    endDate: String
+    desc: String
+  }
+
+  "Information to provide as argument of task when updated"
+  input TaskContentUpdate {
+    name: String
+    priority: Priority
+    category: Category
+    status: Status
     startDate: String
     endDate: String
     desc: String
